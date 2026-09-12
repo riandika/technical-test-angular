@@ -75,7 +75,7 @@ export class Login {
               this.authStorage.setSession(response);
               this.isLoading.set(false);
 
-              void this.router.navigate(['/']);
+              void this.router.navigate(['/home']);
             },
             error: () => {
               this.isLoading.set(false);
