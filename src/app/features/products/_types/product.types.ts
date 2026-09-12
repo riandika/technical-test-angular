@@ -47,4 +47,15 @@ export namespace ProductTypes {
     skip: number;
     limit: number;
   }
+
+  export type SortBy = 'price' | 'rating';
+
+  export type SortOrder = 'asc' | 'desc';
+
+  export interface ProductQueryParams {
+    limit?: number;
+    skip?: number;
+    sortBy?: SortBy;
+    order?: SortOrder;
+  }
 }
