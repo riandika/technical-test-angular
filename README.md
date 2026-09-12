@@ -1,59 +1,59 @@
-# DavaraShop
+# Davara Shop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.8.
+Davara Shop is a simple product web application built as part of an Angular technical test.
 
-## Development server
+The project uses Angular, Tailwind CSS, and DummyJSON API.
 
-To start a local development server, run:
+## Tasks
 
-```bash
-ng serve
+### Task 1 — Product Shop
+
+A responsive product catalog application with:
+
+* Login authentication using DummyJSON API
+* Home page with featured products
+* Product collection with server-side pagination and sorting
+* Product detail page with image gallery and reviews
+* Shopping cart with cart drawer
+* Responsive navigation and footer
+
+Main application features are located under:
+
+```text
+src/app/
+├── core/
+├── shared/
+└── features/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Demo Users
 
-## Code scaffolding
+You can use the following accounts to access the application:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**User 1**
 
-```bash
-ng generate component component-name
+```text
+Email    : emily.johnson@x.dummyjson.com
+Password : emilyspass
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**User 2**
 
-```bash
-ng generate --help
+```text
+Email    : sophia.brown@x.dummyjson.com
+Password : sophiabpass
 ```
 
-## Building
+### Task 2 — Playground / Editor
 
-To build the project run:
+The implementation for Task 2 is located in the following folder:
 
-```bash
-ng build
+```text
+task-2/
+
+atau dengan link playcode.io :
+https://playcode.io/typescript-playground--01a096fa-4754-713f-b753-89900d6f7550
+
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The folder contains the solution and related files for the second task separately from the main Task 1 application.
