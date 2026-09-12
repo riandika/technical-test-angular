@@ -133,7 +133,9 @@
         </div>
 
         <div class="mt-7 flex flex-col gap-4 sm:flex-row">
-          <div class="flex h-12 items-center rounded-full border border-davara-border bg-white">
+          <div
+            class="flex h-12 items-center justify-center rounded-full border border-davara-border bg-white"
+          >
             <button
               type="button"
               aria-label="Decrease quantity"
@@ -159,18 +161,20 @@
             </button>
           </div>
 
-          <button
-            type="button"
-            [disabled]="isOutOfStock()"
-            (click)="addToCart()"
-            class="flex h-12 flex-1 items-center justify-center rounded-full bg-davara-primary px-6 text-sm font-semibold text-white transition-colors hover:bg-davara-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            @if (isOutOfStock()) {
-              Out of stock
-            } @else {
-              Add to cart
-            }
-          </button>
+          <div class="flex h-12 w-full items-center justify-center">
+            <button
+              type="button"
+              [disabled]="isOutOfStock()"
+              (click)="addToCart()"
+              class="flex h-12 flex-1 items-center justify-center rounded-full bg-davara-primary px-6 text-sm font-semibold text-white transition-colors hover:bg-davara-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              @if (isOutOfStock()) {
+                Out of stock
+              } @else {
+                Add to cart
+              }
+            </button>
+          </div>
         </div>
       </div>
     </div>
