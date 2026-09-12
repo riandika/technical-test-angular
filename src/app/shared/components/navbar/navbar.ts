@@ -3,9 +3,11 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 import { AuthStorageService } from '../../../core/services/auth-storage.service';
 import { LoginResponse } from '../../../features/auth/_types/auth.types';
+import { CartService } from '../../../core/services/cart.service';
+import { CartDrawer } from '../cart-drawer/cart-drawer';
 
 @Component({
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CartDrawer],
   selector: 'app-navbar',
   styleUrl: './navbar.css',
   templateUrl: './navbar.html',
@@ -13,12 +15,11 @@ import { LoginResponse } from '../../../features/auth/_types/auth.types';
 export class Navbar {
   private readonly authStorage = inject(AuthStorageService);
   private readonly router = inject(Router);
+  readonly cartService = inject(CartService);
 
   isProfileOpen = signal(false);
-
-  user = signal<LoginResponse | null>(
-    this.authStorage.getUser(),
-  );
+  user = signal<LoginResponse | null>(this.authStorage.getUser());
+  isCartOpen = signal(false);
 
   toggleProfile(): void {
     this.isProfileOpen.update((value) => !value);
@@ -28,7 +29,12 @@ export class Navbar {
     this.isProfileOpen.set(false);
   }
 
+  toggleCart(): void {
+    this.isCartOpen.update((open) => !open);
+  }
+
   logout(): void {
+    this.isCartOpen.set(false);
     this.authStorage.clearSession();
     this.isProfileOpen.set(false);
 

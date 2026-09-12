@@ -48,6 +48,11 @@ export namespace ProductTypes {
     limit: number;
   }
 
+  export interface CartItem {
+    product: Product;
+    quantity: number;
+  }
+
   export type SortBy = 'price' | 'rating';
 
   export type SortOrder = 'asc' | 'desc';

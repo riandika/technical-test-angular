@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs';
 
 import { ProductApiService } from '../_api/product-api.service';
 import { ProductTypes } from '../_types/product.types';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   imports: [CurrencyPipe, DecimalPipe, RouterLink, DatePipe],
@@ -16,6 +17,7 @@ import { ProductTypes } from '../_types/product.types';
 export class ProductDetail {
   private readonly route = inject(ActivatedRoute);
   private readonly productsApi = inject(ProductApiService);
+  private readonly cartService = inject(CartService);
 
   readonly product = signal<ProductTypes.Product | null>(null);
   readonly isLoading = signal(false);
@@ -51,6 +53,16 @@ export class ProductDetail {
 
   decreaseQuantity(): void {
     this.quantity.update((current) => (current > 1 ? current - 1 : current));
+  }
+
+  addToCart(): void {
+    const product = this.product();
+
+    if (!product || product.stock <= 0) {
+      return;
+    }
+
+    this.cartService.addItem(product, this.quantity());
   }
 
   private loadProduct(): void {
