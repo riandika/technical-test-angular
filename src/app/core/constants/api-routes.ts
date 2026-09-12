@@ -5,4 +5,8 @@ export const API_ROUTES = {
   auth: {
     login: '/auth/login',
   },
+  products: {
+    list: '/products',
+    details: (id: number) => `/products/${id}`,
+  },
 } as const;

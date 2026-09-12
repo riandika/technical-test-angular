@@ -1,1 +1,136 @@
-<h1 class="text-3xl font-bold">Davara Home</h1>
+<section class="space-y-8">
+  <section>
+    <div class="overflow-hidden rounded-3xl bg-davara-accent">
+      @if (featuredProducts().length > 0) {
+        <div class="relative min-h-90">
+          @for (product of featuredProducts(); track product.id) {
+            @if (currentSlide() === $index) {
+              <div
+                class="grid min-h-90 items-center lg:grid-cols-2"
+                [class.slide-next]="slideDirection() === 'next'"
+                [class.slide-previous]="slideDirection() === 'previous'"
+              >
+                <div class="px-6 py-7 sm:px-8 lg:px-14">
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-davara-primary">
+                    DAVARA / FEATURED
+                  </p>
+
+                  <div class="min-h-60">
+                    <p class="mt-4 text-xs font-medium uppercase tracking-wide text-davara-muted">
+                      {{ product.category }}
+                    </p>
+
+                    <h1
+                      class="mt-2 max-w-xl text-2xl font-semibold leading-[1.15] tracking-tight text-davara-foreground sm:text-3xl lg:text-4xl"
+                    >
+                      {{ product.title }}
+                    </h1>
+
+                    <p class="mt-4 max-w-md text-xs leading-6 text-davara-muted sm:text-sm">
+                      {{ product.description }}
+                    </p>
+
+                    <a
+                      [routerLink]="['/products', product.id]"
+                      class="mt-6 inline-flex items-center gap-2 border-b border-davara-primary pb-1 text-sm font-semibold text-davara-primary transition-colors hover:border-davara-primary-hover hover:text-davara-primary-hover"
+                    >
+                      Explore product
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div
+                  class="flex min-h-65 items-center justify-center px-6 py-6 sm:px-8 lg:min-h-full lg:px-14 lg:py-8"
+                >
+                  <div
+                    class="flex h-full w-full items-center justify-center overflow-hidden rounded-2xl bg-davara-accent/90"
+                  >
+                    <img
+                      [src]="product.images[0]"
+                      [alt]="product.title"
+                      class="h-50 w-full object-contain mix-blend-multiply sm:h-70 lg:h-75"
+                    />
+                  </div>
+                </div>
+              </div>
+            }
+          }
+
+          <div
+            class="absolute bottom-5 right-6 flex items-center gap-4 rounded-full bg-white/90 px-4 py-2 backdrop-blur sm:right-8 lg:right-14"
+          >
+            <button
+              type="button"
+              aria-label="Previous slide"
+              (click)="previousSlide()"
+              class="text-lg leading-none text-davara-foreground transition-colors hover:text-davara-primary"
+            >
+              ←
+            </button>
+
+            <span class="text-xs font-medium text-davara-muted">
+              {{ currentSlide() + 1 | number: '2.0' }}
+              /
+              {{ featuredProducts().length | number: '2.0' }}
+            </span>
+
+            <button
+              type="button"
+              aria-label="Next slide"
+              (click)="nextSlide()"
+              class="text-lg leading-none text-davara-foreground transition-colors hover:text-davara-primary"
+            >
+              →
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section>
+    <div class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-davara-primary">
+          Collection
+        </p>
+
+        <h2 class="mt-2 text-3xl font-semibold tracking-tight text-davara-foreground">
+          Explore our collection
+        </h2>
+      </div>
+
+      <a
+        routerLink="/products"
+        class="text-sm font-semibold text-davara-primary transition-colors hover:text-davara-primary-hover"
+      >
+        View all →
+      </a>
+    </div>
+
+    @if (isLoading()) {
+      <div class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+        @for (item of [1, 2, 3, 4, 5, 6, 7, 8]; track item) {
+          <div class="animate-pulse">
+            <div class="aspect-square rounded-2xl bg-davara-border"></div>
+
+            <div class="mt-4 h-4 w-3/4 rounded bg-davara-border"></div>
+
+            <div class="mt-2 h-3 w-1/2 rounded bg-davara-border"></div>
+
+            <div class="mt-3 h-3 w-1/4 rounded bg-davara-border"></div>
+          </div>
+        }
+      </div>
+    } @else if (hasError()) {
+      <div class="rounded-2xl border border-davara-border bg-white px-6 py-12 text-center">
+        <p class="text-sm font-medium text-davara-foreground">We couldn't load the collection.</p>
+
+        <p class="mt-2 text-sm text-davara-muted">Please try again later.</p>
+      </div>
+    } @else {
+      <product-list-component [products]="homeProducts()" />
+    }
+  </section>
+</section>

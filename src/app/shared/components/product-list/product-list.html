@@ -1,0 +1,33 @@
+<div class="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-6">
+  @for (product of products(); track product.id) {
+    <article class="group cursor-pointer">
+      <div class="relative aspect-square overflow-hidden rounded-2xl bg-white">
+        <img
+          [src]="product.thumbnail"
+          [alt]="product.title"
+          class="h-full w-full object-contain p-6 transition-transform duration-500 group-hover:scale-110"
+        />
+      </div>
+
+      <div class="mt-4">
+        <p class="text-xs font-medium uppercase tracking-wide text-davara-muted">
+          {{ product.category }}
+        </p>
+
+        <h3 class="mt-1 line-clamp-1 text-sm font-semibold text-davara-foreground">
+          {{ product.title }}
+        </h3>
+
+        <div class="mt-2 flex items-center gap-2 text-xs text-davara-muted">
+          <span class="font-semibold text-orange-300"> ★ {{ product.rating }} </span>
+
+          <span> · {{ product.reviews.length }} reviews </span>
+        </div>
+
+        <p class="mt-2 text-sm font-semibold text-davara-primary">
+          {{ product.price | currency: 'USD' : 'symbol' : '1.2-2' }}
+        </p>
+      </div>
+    </article>
+  }
+</div>

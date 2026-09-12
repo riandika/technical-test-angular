@@ -1,0 +1,31 @@
+@keyframes slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-previous {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-next {
+  animation: slide-next 500ms ease-out both;
+}
+
+.slide-previous {
+  animation: slide-previous 500ms ease-out both;
+}
