@@ -34,10 +34,20 @@ export class AuthStorageService {
     return localStorage.getItem(this.refreshTokenKey);
   }
 
-  getUser(): string | null {
-    return localStorage.getItem(this.userKey);
+  getUser(): LoginResponse | null {
+    const user = localStorage.getItem(this.userKey);
+
+    if (!user) {
+      return null;
+    }
+
+    try {
+      return JSON.parse(user) as LoginResponse;
+    } catch {
+      return null;
+    }
   }
-  
+
   clearSession(): void {
     localStorage.removeItem(this.accessTokenKey);
     localStorage.removeItem(this.refreshTokenKey);

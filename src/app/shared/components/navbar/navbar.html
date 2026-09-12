@@ -1,0 +1,143 @@
+<header class="border-b border-davara-border bg-davara-bg">
+  <nav class="mx-auto flex h-18 max-w-7xl items-center justify-between px-6 lg:px-8">
+    <a routerLink="/home" class="text-xl font-extrabold tracking-[-0.04em] text-davara-foreground">
+      <span class="uppercase tracking-[0.16em] text-davara-foreground">
+        <span class="text-davara-primary">DAVARA</span> SHOP
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      <a
+        routerLink="/home"
+        routerLinkActive="text-davara-primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm font-medium text-davara-muted transition-colors hover:text-davara-foreground"
+      >
+        Home
+      </a>
+
+      <a
+        routerLink="/products"
+        routerLinkActive="text-davara-primary"
+        class="text-sm font-medium text-davara-muted transition-colors hover:text-davara-foreground"
+      >
+        Collection
+      </a>
+    </div>
+
+    <div class="relative">
+      <button
+        type="button"
+        class="flex cursor-pointer items-center gap-3 rounded-full py-1.5 pl-1.5 pr-2 transition-colors hover:bg-white"
+        (click)="toggleProfile()"
+        [attr.aria-expanded]="isProfileOpen()"
+        aria-label="Open profile menu"
+      >
+        @if (user()?.image) {
+          <img
+            [src]="user()!.image"
+            [alt]="user()!.firstName"
+            class="h-9 w-9 rounded-full object-cover"
+          />
+        } @else {
+          <div
+            class="flex h-9 w-9 items-center justify-center rounded-full bg-davara-accent text-davara-primary"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              class="h-5 w-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 6.75a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.5 20.25a7.5 7.5 0 0 1 15 0"
+              />
+            </svg>
+          </div>
+        }
+
+        <span class="hidden text-sm font-semibold text-davara-foreground sm:block">
+          {{ user()?.username }}
+        </span>
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          class="h-4 w-4 text-davara-muted transition-transform"
+          [class.rotate-180]="isProfileOpen()"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      @if (isProfileOpen()) {
+        <div
+          class="absolute right-0 top-full z-50 mt-3 w-64 overflow-hidden rounded-2xl border border-davara-border bg-white shadow-[0_12px_40px_rgba(24,24,27,0.08)]"
+        >
+          <div class="px-4 py-4">
+            <p class="text-sm font-bold text-davara-foreground">
+              {{ user()?.firstName }} {{ user()?.lastName }}
+            </p>
+
+            <p class="mt-1 text-xs text-davara-muted">
+              {{ user()?.email }}
+            </p>
+          </div>
+
+          <div class="border-t border-davara-border py-1 md:hidden">
+            <a
+              routerLink="/home"
+              routerLinkActive="bg-davara-bg text-davara-primary"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="block px-4 py-3 text-sm font-medium text-davara-muted transition-colors hover:bg-davara-bg hover:text-davara-foreground"
+              (click)="closeProfile()"
+            >
+              Home
+            </a>
+
+            <a
+              routerLink="/products"
+              routerLinkActive="bg-davara-bg text-davara-primary"
+              class="block px-4 py-3 text-sm font-medium text-davara-muted transition-colors hover:bg-davara-bg hover:text-davara-foreground"
+              (click)="closeProfile()"
+            >
+              Collection
+            </a>
+          </div>
+
+          <div class="border-t border-davara-border">
+            <button
+              type="button"
+              class="flex w-full cursor-pointer items-center gap-3 px-4 py-3.5 text-left text-sm font-medium text-davara-muted transition-colors hover:bg-davara-bg hover:text-davara-foreground"
+              (click)="logout()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                class="h-5 w-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 8.25V6.75A2.25 2.25 0 0 0 13.5 4.5h-6A2.25 2.25 0 0 0 5.25 6.75v10.5A2.25 2.25 0 0 0 7.5 19.5h6a2.25 2.25 0 0 0 2.25-2.25v-1.5M18 15l3-3m0 0-3-3m3 3H9"
+                />
+              </svg>
+
+              Sign out
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </nav>
+</header>
