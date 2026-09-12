@@ -89,17 +89,35 @@
             </div>
 
             @if (isInvalid('password')) {
-              <span class="absolute left-0 top-full mt-1 text-xs font-medium text-red-600">Password is required.</span>
+              <span class="absolute left-0 top-full mt-1 text-xs font-medium text-red-600">
+                Password is required.
+              </span>
+            }
+
+            @if (loginError()) {
+              <span class="absolute left-0 top-full mt-1 text-xs font-medium text-red-600">
+                {{ loginError() }}
+              </span>
             }
           </div>
 
           <div class="pt-4">
-              <button
-                type="submit"
-                class="h-11 w-full cursor-pointer rounded-xl bg-davara-primary px-5 text-sm font-bold text-white transition hover:bg-davara-primary-hover active:scale-[0.99]"
-              >
+            <button
+              type="submit"
+              [disabled]="isLoading()"
+              class="h-11 w-full cursor-pointer rounded-xl bg-davara-primary px-5 text-sm font-bold text-white transition hover:bg-davara-primary-hover active:scale-[0.99]"
+            >
+              @if (isLoading()) {
+                <span class="flex items-center justify-center gap-2">
+                  <span
+                    class="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
+                  ></span>
+                  Signing in...
+                </span>
+              } @else {
                 Sign in
-              </button>
+              }
+            </button>
           </div>
         </form>
 
@@ -110,6 +128,16 @@
             class="cursor-pointer font-bold text-davara-foreground underline decoration-davara-primary underline-offset-4"
           >
             Create one
+          </button>
+
+          <span class="mx-2 text-davara-muted">|</span>
+
+          <button
+            type="button"
+            class="shrink-0 cursor-pointer font-bold text-davara-primary transition hover:text-davara-primary-hover"
+            (click)="useDemoAccount()"
+          >
+            Use Demo
           </button>
         </p>
       </div>
